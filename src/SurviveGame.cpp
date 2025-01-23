@@ -54,7 +54,7 @@ void SurviveGame::play() {
         std::cout << "杀手进入！！！！开始环顾选择" << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(3));
         int dead_chair = GameUtil::randomNumInRange(1, m_competitors.size());
-        std::cout << "杀手已经选好了！！！！他选择了 " << dead_chair << "  !!!" << std::endl;
+        std::cout << "杀手举起枪！！！！他瞄准了 " << dead_chair << "  !!!" << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(2));
         std::cout << "杀手射击！！！！" << std::endl;
         std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -66,9 +66,10 @@ void SurviveGame::play() {
             m_competitors.erase(m_competitors.begin() + std::max(chair, dead_chair) - 1);
             m_competitors.erase(m_competitors.begin() + std::min(chair, dead_chair) - 1);
         }
+        std::this_thread::sleep_for(std::chrono::seconds(1));
+        std::cout << "杀手离开！！！！" << std::endl;
 
-
-        std::this_thread::sleep_for(std::chrono::seconds(3));
+        std::this_thread::sleep_for(std::chrono::seconds(2));
     }
     std::cout << "最后幸存者是： " << m_player.getId() << " 你赢了！" << std::endl;
 }
