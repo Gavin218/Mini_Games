@@ -43,8 +43,8 @@ bool CowboyShowdownGame::showdown() {
     std::cout << "等待信号指令！信号指令一旦发出就可以射击！如果提前掏枪你将被判负！" << std::endl;
     
     // 设置随机数生成器
-    std::random_device rd;
-    std::mt19937 gen(rd());
+    auto time_seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::mt19937 gen(time_seed);
     std::uniform_int_distribution<> waitDist(3000, 10000);
     int waitTime = waitDist(gen);
     

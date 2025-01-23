@@ -45,3 +45,16 @@ std::vector<std::shared_ptr<Player>> GameUtil::generateEnemyVec(int enemyNum) {
     std::shuffle(enemys.begin(), enemys.end(), gen);  // 打乱顺序
     return enemys;
 }
+
+
+int GameUtil::randomNumInRange(int left, int right) {
+    auto time_seed = std::chrono::system_clock::now().time_since_epoch().count();
+    
+    // 使用 Mersenne Twister 引擎生成随机数
+    std::mt19937 gen(time_seed);
+    
+    // 创建一个均匀分布，范围为 [1, 100]
+    std::uniform_int_distribution<> dist(left, right);
+
+    return dist(gen);
+}

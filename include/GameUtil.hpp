@@ -17,6 +17,8 @@ public:
 
     static std::vector<std::shared_ptr<Player>> generateEnemyVec(int enemyNum);
 
+    static int randomNumInRange(int left, int right);
+
 };
 
 #endif // GAME_UTIL_H

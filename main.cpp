@@ -1,6 +1,8 @@
 #include "Game.hpp"
 #include "RussianRouletteGame.hpp"
 #include "CowboyShowdownGame.hpp"
+#include "SurviveGame.hpp"
+
 #include "Player.hpp"
 #include "HumanPlayer.hpp"
 #include "ComputerPlayer.hpp"
@@ -32,6 +34,7 @@ std::map<int, std::string> addGameDesc() {
     std::map<int, std::string> game2Desc;
     game2Desc[1] = "俄罗斯轮盘赌";
     game2Desc[2] = "牛仔对决";
+    game2Desc[3] = "生存游戏";
     return game2Desc;
 }
 
@@ -54,6 +57,9 @@ int main() {
         break;
     case 2:
         game = new CowboyShowdownGame(player); // 根据选择创建游戏
+        break;
+    case 3:
+        game = new SurviveGame(player); // 根据选择创建游戏
         break;
     default:
         break;
