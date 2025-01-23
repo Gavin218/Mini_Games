@@ -69,12 +69,13 @@ bool RussianRouletteGame::showdown() {
             return my_round;
         } else {
             std::cout << "ka~~~ (空弹)" << std::endl;
+            std::this_thread::sleep_for(std::chrono::seconds(2));
             if (my_round) {
                 std::cout << "你逃过一劫！！手枪交给对手！！" << std::endl;
             } else {
                 std::cout << "对手逃过一劫！！手枪交给你！！" << std::endl;
             }
-            
+            std::this_thread::sleep_for(std::chrono::seconds(1));
             my_round = !my_round;
         }
         std::cout << std::endl;
