@@ -1,4 +1,5 @@
 #include "GameUtil.hpp"
+#include "ComputerPlayer.hpp"
 
 #include <algorithm>
 #include <random>
@@ -26,4 +27,21 @@ std::string GameUtil::generateOneEnglishName() {
     }
     
     return result;
+}
+
+std::vector<std::shared_ptr<Player>> GameUtil::generateEnemyVec(int enemyNum) {
+    std::vector<std::shared_ptr<Player>> enemys;
+    std::set<std::string> names;
+    for (int i = 0; i < enemyNum; i++) {
+        std::string new_name = generateOneEnglishName();
+        while (names.find(new_name) != names.end()) {
+            new_name = generateOneEnglishName();
+        }
+        auto enemy = std::make_shared<ComputerPlayer>(new_name);
+        enemys.push_back(enemy);
+    }
+    auto time_seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::mt19937 gen(time_seed);  // 使用系统时间生成的种子
+    std::shuffle(enemys.begin(), enemys.end(), gen);  // 打乱顺序
+    return enemys;
 }

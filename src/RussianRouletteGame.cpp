@@ -19,18 +19,7 @@ void RussianRouletteGame::play() {
     std::cin.get();
     std::cout << std::endl;
 
-    std::set<std::string> names;
-    for (int i = 0; i < enemyNum; i++) {
-        std::string new_name = GameUtil::generateOneEnglishName();
-        while (names.find(new_name) != names.end()) {
-            new_name = GameUtil::generateOneEnglishName();
-        }
-        auto enemy = std::make_shared<ComputerPlayer>(new_name);
-        m_enemys.push_back(enemy);
-    }
-    auto time_seed = std::chrono::system_clock::now().time_since_epoch().count();
-    std::mt19937 gen(time_seed);  // 使用系统时间生成的种子
-    std::shuffle(m_enemys.begin(), m_enemys.end(), gen);  // 打乱顺序
+    m_enemys = GameUtil::generateEnemyVec(enemyNum);
 
     std::cout << "游戏开始！主角 " << m_player.getId() << " 登场！" << std::endl;
     while (!m_enemys.empty()) {
@@ -65,11 +54,11 @@ bool RussianRouletteGame::showdown() {
     bool my_round = true;
     while (!m_bullets.empty()) {
         if (my_round) {
-            std::cout << "请你扣动扳机！" << std::endl;
+            std::cout << "请你扣动扳机！(回车)" << std::endl;
             // std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); 
             std::cin.get();  
         } else {
-            std::cout << "等待对手扣动扳机！" << std::endl;
+            std::cout << "等待对手扣动扳机！（不需操作，等待即可）" << std::endl;
             std::this_thread::sleep_for(std::chrono::seconds(3));
         }
 
